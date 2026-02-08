@@ -93,3 +93,32 @@ Content-Type: application/json
 
 ###Delete the data from DB
 DELETE http://localhost:4004/odata/v4/CatalogService/EmployeeSet/a65bf4ca-2fb7-43fe-ad7b-d55663052dbd
+
+###Deep Insert - Create order header + items together
+POST http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSet
+Content-Type: application/json
+
+{ "@odata.context" :"$metadata#PurchaseOrderSet/$entity",
+"CURRENCY_code" :"EUR",
+"GROSS_AMOUNT" : 4467.94,
+"NET_AMOUNT" : 3754.57,
+"TAX_AMOUNT" :713.37,
+"NODE_KEY" :"74867AD200E41EDBA5D8B0C98DC80666",
+"PO_ID" :"300000004",
+"PARTNER_GUID_NODE_KEY" :"74867AD200E41EDBA5D8B06885AB8052",
+"LIFECYCLE_STATUS" :"N",
+"OVERALL_STATUS" :"P",
+"NOTE" :null,
+"Items" :[
+  {"CURRENCY_code":"EUR","GROSS_AMOUNT":107.08,"NET_AMOUNT":89.98,"TAX_AMOUNT":17.1,
+  "NODE_KEY":"74867AD200E41EDBA5D8B0CBD35E2999",
+
+  "PO_ITEM_POS":10,"PRODUCT_GUID_NODE_KEY":"74867AD200E41EDBA5D8B06B26F6E052"},
+  {"CURRENCY_code":"EUR","GROSS_AMOUNT":95.08,"NET_AMOUNT":79.9,
+  "TAX_AMOUNT":15.18,"NODE_KEY":"74867AD200E41EDBA5D8B0CBD35E6036",
+  "PO_ITEM_POS":20,
+  "PRODUCT_GUID_NODE_KEY":"74867AD200E41EDBA5D8B06B26F14052"}
+  ] }
+
+####Check the data is inserted or not
+  http://localhost:4004/odata/v4/CatalogService/PurchaseOrderSet/74867AD200E41EDBA5D8B0C98DC80666?$expand=Items
