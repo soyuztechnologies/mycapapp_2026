@@ -12,5 +12,30 @@
   "scripts": {
     "start": "cds-serve"
   },
-  "private": true
+  "cds": {
+    "requires": {
+      "auth": {
+        "[development]": {
+          "kind": "mocked",
+          "users": {
+            "alice": {
+              "password": "anubhav",
+              "roles": ["admin"]
+            },
+            "bob": {
+              "password": "ananya",
+              "roles": ["viewer"]
+            }
+          }
+        },
+        "[production]": {
+          "kind": "xsuaa"
+        }
+      }
+    }
+  },
+  "private": true,
+  "sapux": [
+    "app/managepo"
+  ]
 }

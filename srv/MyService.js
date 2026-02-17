@@ -13,7 +13,7 @@ module.exports = class MyService extends cds.ApplicationService { init() {
 
 
       //Please overwrite the standard behavior of my entity
-    srv.on("READ",'ReadEmpSrv', async (req,res) => {
+    this.on("READ",'ReadEmpSrv', async (req,res) => {
 
         var whereCondition = req.data;
         console.log(whereCondition);
@@ -30,7 +30,7 @@ module.exports = class MyService extends cds.ApplicationService { init() {
 
 
     
-    srv.on("CREATE", "InserEmployeeSrv", async(req,res) => {
+    this.on("CREATE", "InserEmployeeSrv", async(req,res) => {
         var dataSet = req.data;
         let returnData = await cds.transaction(req).run([
             INSERT.into(employees).entries(dataSet)
@@ -46,7 +46,7 @@ module.exports = class MyService extends cds.ApplicationService { init() {
         return returnData;
     });
 
-    srv.on("UPDATE", "UpdateEmployeeSrv", async(req,res) => {
+    this.on("UPDATE", "UpdateEmployeeSrv", async(req,res) => {
         var dataSet = req.data;
         let returnData = await cds.transaction(req).run([
             UPDATE(employees).set({
@@ -67,7 +67,7 @@ module.exports = class MyService extends cds.ApplicationService { init() {
         return returnData;
     });
 
-    srv.on("DELETE", "DeleteEmployeeSrv", async(req,res) => {
+    this.on("DELETE", "DeleteEmployeeSrv", async(req,res) => {
         var dataSet = req.data;
         console.log(req.data.ID)
         let returnData = await cds.transaction(req).run([

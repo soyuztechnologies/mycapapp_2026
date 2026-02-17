@@ -75,6 +75,11 @@ context master {
         DIM_UNIT: String(2);
     }
 
+    entity StatusCode{
+        key code : String(1);
+        description: String(255);
+    }
+
 }
 
 context transaction {
